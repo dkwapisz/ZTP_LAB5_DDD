@@ -25,13 +25,13 @@ namespace Eshop.Domain.Orders
         public static Order Create(
             Guid customerId,
             List<OrderProductData> orderProductsData,
-            List<ProductPriceData> allProductPriceDatas)
+            List<ProductPriceData> allProductPriceData)
         {
             List<OrderProduct> orderProducts = new();
 
             foreach (var orderProductData in orderProductsData)
             {
-                var productPriceData = allProductPriceDatas.First(x => x.ProductId == orderProductData.ProductId);
+                var productPriceData = allProductPriceData.First(x => x.ProductId == orderProductData.ProductId);
 
                 var orderProduct = OrderProduct.Create(orderProductData.ProductId, orderProductData.Quantity, productPriceData.UnitPrice);
 
@@ -39,6 +39,7 @@ namespace Eshop.Domain.Orders
             }
 
             CheckRule(new OrderMustHaveAtLeastOneProductRule(orderProducts));
+            CheckRule(new OrderProductPriceHasToBeInLimit(orderProducts));
 
             return new Order(customerId, orderProducts);
         }
