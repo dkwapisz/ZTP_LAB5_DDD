@@ -1,6 +1,8 @@
-﻿using Eshop.Domain.Orders;
+﻿using Eshop.Domain.Customers;
+using Eshop.Domain.Orders;
 using Eshop.Domain.SeedWork;
 using Eshop.Infrastructure.Database;
+using Eshop.Infrastructure.Database.Contexts;
 using Eshop.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,8 @@ namespace Eshop.Infrastructure
         public static void RegistryInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IOrderRepository, OrderRepository>();
+            
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             services.AddScoped<IProductPriceDataApi, ProductPriceDataApi>();
 
@@ -24,15 +28,11 @@ namespace Eshop.Infrastructure
 
             MongoDbSettings mongoDbSettings = configuration.GetSection("MongoDB").Get<MongoDbSettings>() ?? throw new InvalidOperationException();
 
-            services.AddSingleton<IMongoClient>(ServiceProvider =>
-            {
-                return new MongoClient(mongoDbSettings.ConnectionString);
-            });
+            services.AddSingleton<IMongoClient>(_ => new MongoClient(mongoDbSettings.ConnectionString));
 
-            services.AddSingleton(provider =>
-            {
-                return new OrdersContext(mongoDbSettings);
-            });
+            services.AddSingleton(_ => new OrdersContext(mongoDbSettings));
+            
+            services.AddSingleton(_ => new CustomersContext(mongoDbSettings));
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Eshop.Application.Orders.CustomerOrder.Queries;
+﻿using System.Net;
+using Eshop.Application.Orders.CustomerOrder.Queries;
 using Eshop.Application.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace Eshop.API.Controllers
 {

@@ -9,9 +9,9 @@ namespace Eshop.Domain.SeedWork
 
         public static bool operator ==(ValueObject obj1, ValueObject obj2)
         {
-            if (object.Equals(obj1, null))
+            if (Equals(obj1, null))
             {
-                if (object.Equals(obj2, null))
+                if (Equals(obj2, null))
                 {
                     return true;
                 }
@@ -40,12 +40,12 @@ namespace Eshop.Domain.SeedWork
 
         private bool PropertiesAreEqual(object obj, PropertyInfo p)
         {
-            return object.Equals(p.GetValue(this, null), p.GetValue(obj, null));
+            return Equals(p.GetValue(this, null), p.GetValue(obj, null));
         }
 
         private bool FieldsAreEqual(object obj, FieldInfo f)
         {
-            return object.Equals(f.GetValue(this), f.GetValue(obj));
+            return Equals(f.GetValue(this), f.GetValue(obj));
         }
 
         private IEnumerable<PropertyInfo> GetProperties()

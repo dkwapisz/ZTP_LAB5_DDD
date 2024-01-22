@@ -1,6 +1,5 @@
 ﻿using Eshop.Domain.Orders;
-using Eshop.Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
+using Eshop.Infrastructure.Database.Contexts;
 using MongoDB.Driver;
 
 namespace Eshop.Infrastructure.Repositories

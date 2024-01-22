@@ -27,9 +27,9 @@
 
         public static bool operator ==(TypedIdValueBase obj1, TypedIdValueBase obj2)
         {
-            if (object.Equals(obj1, null))
+            if (Equals(obj1, null))
             {
-                if (object.Equals(obj2, null))
+                if (Equals(obj2, null))
                 {
                     return true;
                 }

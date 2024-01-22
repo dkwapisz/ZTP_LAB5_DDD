@@ -1,7 +1,7 @@
 ﻿using Eshop.Domain.Orders;
 using MongoDB.Driver;
 
-namespace Eshop.Infrastructure.Database
+namespace Eshop.Infrastructure.Database.Contexts
 {
     internal class OrdersContext
     {
