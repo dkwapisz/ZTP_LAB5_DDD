@@ -1,5 +1,6 @@
-using Eshop.Domain.Customers.Events;
 using MediatR;
+
+namespace Eshop.Domain.Customers.Events;
 
 internal class CustomerCreatedEventHandler : INotificationHandler<CustomerCreatedEvent>
 {
